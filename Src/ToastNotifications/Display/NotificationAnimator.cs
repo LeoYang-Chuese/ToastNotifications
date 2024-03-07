@@ -21,17 +21,17 @@ namespace ToastNotifications.Display
 
         public void Setup()
         {
-            ScaleTransform scale = new ScaleTransform(1, 0);
+            var scale = new ScaleTransform(1, 0);
             _displayPart.RenderTransform = scale;
         }
 
         public void PlayShowAnimation()
         {
             var scale = (ScaleTransform)_displayPart.RenderTransform;
-            scale.CenterY = _displayPart.ActualHeight / 2;
-            scale.CenterX = _displayPart.ActualWidth / 2;
+            scale.CenterY = _displayPart.ActualHeight;
+            scale.CenterX = _displayPart.ActualWidth;
 
-            Storyboard storyboard = new Storyboard();
+            var storyboard = new Storyboard();
 
             SetGrowYAnimation(storyboard);
             SetGrowXAnimation(storyboard);
@@ -42,11 +42,12 @@ namespace ToastNotifications.Display
 
         private void SetFadeInAnimation(Storyboard storyboard)
         {
-            DoubleAnimation fadeInAnimation = new DoubleAnimation
+            var fadeInAnimation = new DoubleAnimation
             {
                 Duration = _showAnimationTime,
                 From = 0,
-                To = 1
+                To = 1,
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
             };
             storyboard.Children.Add(fadeInAnimation);
             Storyboard.SetTargetProperty(fadeInAnimation, new PropertyPath("Opacity"));
@@ -55,11 +56,12 @@ namespace ToastNotifications.Display
 
         private void SetGrowXAnimation(Storyboard storyboard)
         {
-            DoubleAnimation growXAnimation = new DoubleAnimation
+            var growXAnimation = new DoubleAnimation
             {
                 Duration = _showAnimationTime,
                 From = 0,
-                To = 1
+                To = 1,
+                EasingFunction = new QuarticEase { EasingMode = EasingMode.EaseOut }
             };
             storyboard.Children.Add(growXAnimation);
             Storyboard.SetTargetProperty(growXAnimation, new PropertyPath("RenderTransform.ScaleX"));
@@ -68,11 +70,12 @@ namespace ToastNotifications.Display
 
         private void SetGrowYAnimation(Storyboard storyboard)
         {
-            DoubleAnimation growYAnimation = new DoubleAnimation
+            var growYAnimation = new DoubleAnimation
             {
                 Duration = _showAnimationTime,
                 From = 0,
-                To = 1
+                To = 1,
+                EasingFunction = new QuarticEase { EasingMode = EasingMode.EaseOut }
             };
             storyboard.Children.Add(growYAnimation);
             Storyboard.SetTargetProperty(growYAnimation, new PropertyPath("RenderTransform.ScaleY"));
@@ -83,10 +86,10 @@ namespace ToastNotifications.Display
         {
             _displayPart.MinHeight = 0;
             var scale = (ScaleTransform)_displayPart.RenderTransform;
-            scale.CenterY = _displayPart.ActualHeight / 2;
-            scale.CenterX = _displayPart.ActualWidth / 2;
+            scale.CenterY = _displayPart.ActualHeight;
+            scale.CenterX = _displayPart.ActualWidth;
 
-            Storyboard storyboard = new Storyboard();
+            var storyboard = new Storyboard();
 
             SetShrinkYAnimation(storyboard);
             SetShrinkXAnimation(storyboard);
@@ -97,11 +100,12 @@ namespace ToastNotifications.Display
 
         private void SetFadeoutAnimation(Storyboard storyboard)
         {
-            DoubleAnimation fadeOutAnimation = new DoubleAnimation
+            var fadeOutAnimation = new DoubleAnimation
             {
                 Duration = _hideAnimationTime,
                 From = 1,
-                To = 0
+                To = 0,
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseIn }
             };
 
             storyboard.Children.Add(fadeOutAnimation);
@@ -111,30 +115,30 @@ namespace ToastNotifications.Display
 
         private void SetShrinkXAnimation(Storyboard storyboard)
         {
-            DoubleAnimation shrinkXAnimation = new DoubleAnimation
+            var shrinkXAnimation = new DoubleAnimation
             {
                 Duration = _hideAnimationTime,
                 From = 1,
-                To = 0
+                To = 0,
+                EasingFunction = new QuarticEase { EasingMode = EasingMode.EaseIn }
             };
 
             storyboard.Children.Add(shrinkXAnimation);
-
             Storyboard.SetTargetProperty(shrinkXAnimation, new PropertyPath("RenderTransform.ScaleX"));
             Storyboard.SetTarget(shrinkXAnimation, _displayPart);
         }
 
         private void SetShrinkYAnimation(Storyboard storyboard)
         {
-            DoubleAnimation shrinkYAnimation = new DoubleAnimation
+            var shrinkYAnimation = new DoubleAnimation
             {
                 Duration = _hideAnimationTime,
                 From = _displayPart.ActualHeight,
-                To = 0
+                To = 0,
+                EasingFunction = new QuarticEase { EasingMode = EasingMode.EaseIn }
             };
 
             storyboard.Children.Add(shrinkYAnimation);
-
             Storyboard.SetTargetProperty(shrinkYAnimation, new PropertyPath("Height"));
             Storyboard.SetTarget(shrinkYAnimation, _displayPart);
         }
