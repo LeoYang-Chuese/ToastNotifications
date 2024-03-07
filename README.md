@@ -7,6 +7,8 @@
    |_|\___/ \__,_|___/\__|_| \_|\___/ \__|_|_| |_|\___\__,_|\__|_|\___/|_| |_|___/    \_/|____|
 
 ```
+# ToastNotifications v3
+#### Support for new framework versions and some new features
 
 # ToastNotifications v2
 #### Toast notifications for WPF
